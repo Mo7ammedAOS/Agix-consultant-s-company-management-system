@@ -1,0 +1,65 @@
+{% extends 'decoration.html' %}
+{% load static %}
+
+{% block title %} AGIX PROJECTS {% endblock %}
+
+
+{% block content %}
+  <!-- This div represent page navbar -->
+  <div class="navbar">
+        <a class="navbar-logo" href="{% url 'home_set' %}">
+            <img src="{% static 'images/AGIX PaDer.png'%}">
+        </a>
+        <ul class="buttons">
+            <li class="btm"><a class="nav-link" href="{% url 'staff' %}">Staff</a></li>
+            {% if request.user.is_authenticated %}
+            <li class="btm"><a class="nav-link" href="{% url 'logout' %}">Logout Admin</a></li>
+            {% endif %}    
+        </ul>
+
+    </div>
+
+    <div class="table-containers">
+
+        <table class="table">
+            
+            <thead class="thead-light">
+                <tr>
+                    <th>No</th>
+                    <th>Project Name</th>
+                    <th>Client Name</th>
+                    <th>status</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'proj_dtls' project.id %}" class="staff-name">{{project.project_name}}</a></td>
+                    <td>{{project.client_name}}</td>
+                    {% if project.complete %}
+                    <td>comlpeted</td>
+                    {% else %}
+                    <td><a href="{% url 'done' project.id %}" class="in-complete">in-comlpeted</a></td>
+                    {% endif %}
+
+                    <td>
+                        <a href="{% url 'update_project' project.id %}" class="updlt"><img src="{% static 'images/edit.png'%}" alt="pictiure not found"></a>
+                        <span>|</span>  
+                        <a href="{% url 'dl_project' project.id %}" class="updlt"><img src="{% static 'images/delete.png'%}" alt="pictiure not found"></a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="on-t"><a href="{% url 'adding_project' %}" class="inc1">Add project</a> <a href="{% url 'all_dl'%}" class="inc2">Delete all</a></td>
+                    <td class="on-t"></td>
+                    <td class="on-t"></td>
+                    <td class="on-t"></td>
+                </tr>
+        </table>
+    </div>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static  'css_additional/main.css' %}">
+    <link rel="stylesheet" href="{% static  'css_additional/main_2.css' %}">
+    <title>LOGIN</title>
+</head>
+<body>
+<div class="body">
+    <div class="contain">
+       <form method="post" action="">
+            {% csrf_token %}
+            <h2>
+               Admin Login
+            </h2>
+            <div class="detailUs">
+                <label for="username">Username:</label>
+                <input type="text" name="username">
+            </div>
+            <div class="detailPs">
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+            </div>
+            <button>login</button>
+       </form> 
+    </div>
+</div>
+</body>

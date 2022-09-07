@@ -1,0 +1,56 @@
+{% extends 'decoration.html' %}
+{% load static %}
+
+{% block title %} STAFF {% endblock %}
+
+
+{% block content %}
+        <div class="navbar">
+            <a class="navbar-logo" href="{% url 'home_set' %}">
+                <img src="{% static 'images/AGIX PaDer.png'%}">
+            </a>
+            <ul class="buttons">
+                <li class="btm"><a class="nav-link" href="{% url 'staff' %}">Staff</a></li>
+                {% if request.user.is_authenticated %}
+                <li class="btm"><a class="nav-link" href="{% url 'login' %}">Logout Admin</a></li>
+                {% endif %}    
+            </ul>
+        
+        </div>
+
+        <div class="table-containers">
+
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>No</th>
+                        <th>Employee Name</th>
+                        <th>Major</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for stf in staff %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="{% url 'info' stf.id %}" class="staff-name">{{stf.employee_name}}</a></td>
+                        <td>{{stf.employee_major}}</td>
+                        <td>
+                            <a href="{% url 'update_employee' stf.id %}" class="updlt"><img src="{% static 'images/edit.png'%}" alt="pictiure not found"></a>
+                            <span>|</span>  
+                            <a href="{% url 'dl_employee' stf.id %}" class="updlt"><img src="{% static 'images/delete.png'%}" alt="pictiure not found"></a>
+                        </td>  
+                    </tr>
+
+                    {% endfor %}
+                    <tr>
+                        <td class="on-t"><a href="{% url 'add_employee' %}" class="add-project">Add Employee</a></td>
+                        <td class="on-t"></td>
+                        <td class="on-t"></td>
+                    </tr>
+            </table>
+        </div>
+
+    </div>
+{% endblock %}

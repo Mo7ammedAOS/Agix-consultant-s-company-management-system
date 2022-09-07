@@ -1,0 +1,70 @@
+{% extends 'decoration.html' %}
+{% load static %}
+
+{% block title %} ADD EMPLOYEE {% endblock %}
+
+
+{% block content %}
+  <!-- This div represent page navbar -->
+  <div class="navbar">
+        <a class="navbar-logo" href="{% url 'home_set' %}">
+            <img src="{% static 'images/AGIX PaDer.png'%}">
+        </a>
+        <ul class="buttons">
+            <li class="btm"><a class="nav-link" href="{% url 'staff' %}">Staff</a></li>
+            {% if request.user.is_authenticated %}
+            <li class="btm"><a class="nav-link" href="{% url 'login' %}">Logout Admin</a></li>
+            {% endif %}    
+        </ul>
+
+    </div>
+        <div class="inp-container">
+            <form method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="insert-data">
+                    <label for="project_name" class="label">Employee Name:</label>
+                    <input  type="text" name="employee_name" class="input-char" >
+                </div>
+                <div class="insert-data">
+                    <label for="client_name" class="label" >Major:</label>
+                    <input  type="text" name="major" class="input-char" >
+                </div>
+                <div class="insert-data">
+                    <label for="description" class="label">Employee Bio:</label>
+                    <textarea name="description" id="description" cols="30" rows="6" class="input-text"></textarea>
+                </div>
+
+                <div class="insert-data">
+                    <p>Skills:</p>
+                    {% for skill in skills %}
+                    <div class="choose-data">
+                        <input type="checkbox" id="{{skill}}" name="skill" value="{{skill}}">
+                        <label for="{{project.project_name}}">{{skill}}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+                <div class="insert-data">
+                    <p>Work participations:</p>
+                    {% for project in projects %}
+                    <div class="choose-data">
+                        <input type="checkbox" id="{{project.project_name}}" name="proj" value="{{project.project_name}}">
+                        <label for="{{project.project_name}}">{{project.project_name}}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            
+                <div class="insert-data">
+                    <label for="picture" class="label">Employer Picture:</label>
+                    <input type="file" id="ps" name="ps" accept="image/png, image/jpeg" class="input-img">
+                </div>
+
+                <div class="insert-data">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

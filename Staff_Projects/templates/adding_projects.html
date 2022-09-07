@@ -1,0 +1,55 @@
+{% extends 'decoration.html' %}
+{% load static %}
+
+{% block title %} ADDING PROJECTS {% endblock %}
+
+
+{% block content %}
+        <div class="navbar">
+            <a class="navbar-logo" href="{% url 'home_set' %}">
+                <img src="{% static 'images/AGIX PaDer.png'%}">
+            </a>
+            <ul class="buttons">
+                <li class="btm"><a class="nav-link" href="{% url 'staff' %}">Staff</a></li>
+                {% if request.user.is_authenticated %}
+                <li class="btm"><a class="nav-link" href="{% url 'login' %}">Logout Admin</a></li>
+                {% endif %}    
+            </ul>
+
+        </div>
+
+        <div class="inp-container">
+            <form method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="insert-data">
+                    <label for="project_name" class="label">Project Name:</label>
+                    <input  type="text" name="project_name" class="input-char" >
+                </div>
+                <div class="insert-data">
+                    <label for="client_name" class="label" >Client Name:</label>
+                    <input  type="text" name="client_name" class="input-char" >
+                </div>
+                <div class="insert-data">
+                    <label for="description" class="label">Project Description:</label>
+                    <textarea name="description" id="description" cols="30" rows="6" class="input-text"></textarea>
+                </div>
+
+                <div class="insert-data">
+                    <label for="pic" class="label">Project Picture:</label>
+                    <input type="file" id="pic" name="pic" accept="image/png, image/jpeg" class="input-img">
+                </div>
+
+                <div class="insert-data">
+                    <p>Project status:</p>
+                    <div class="choose-data">
+                        <input type="checkbox" id="status" name="complete" value="status">
+                        <label for="status">Completed</label>
+                    </div>
+                </div>
+                <div class="insert-data">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+
+        </div>
+{% endblock %}

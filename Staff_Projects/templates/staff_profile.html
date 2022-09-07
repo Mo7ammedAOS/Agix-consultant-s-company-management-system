@@ -1,0 +1,48 @@
+{% extends 'decoration.html' %}
+{% load static %}
+
+{% block title %} Employee Profile {% endblock %}
+
+
+{% block content %}
+         <!-- This div represent page navbar -->
+         <div class="navbar">
+            <a class="navbar-logo" href="{% url 'home_set' %}">
+                <img src="{% static 'images/AGIX PaDer.png'%}">
+            </a>
+            <ul class="buttons">
+                <li class="btm"><a class="nav-link" href="{% url 'staff' %}">Staff</a></li>
+                {% if request.user.is_authenticated %}
+                <li class="btm"><a class="nav-link" href="{% url 'login' %}">Logout Admin</a></li>
+                {% endif %}   
+            </ul>
+        </div>
+
+        <div class="id-container">
+            <div class="profile-pic">
+                <img src="{{pers_profile.employee_profile_picture.url}}" altr="Sorry picture not found" class="prof-pic">
+            </div>
+            <div class="personal">
+                <h2 class="emp-name">{{pers_profile.employee_name}}</h2>
+                <h2 class="bio">Bio:</h2>
+                <p>{{pers_profile.employee_description}}</p>
+                <h2 class="bio">Major:</h2>
+                <p>{{pers_profile.employee_major}}</p>
+            </div>
+            <div class="skills">
+                <h2>Skills:</h2>
+                <ul>
+                    {% for major in employee_job %}
+                    <li>{{major.skills}}</li>
+                    {% endfor %}
+                </ul>
+                <h2>Previous projects participations:</h2>
+                    <ul>
+                        {% for participant in previous_participants %}
+                        <li>{{participant.project_name}}</li>
+                        {% endfor %}
+                    </ul>
+                </h2>
+            </div>
+        </div>
+{% endblock %}

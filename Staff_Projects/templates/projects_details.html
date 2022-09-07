@@ -1,0 +1,33 @@
+{% extends 'decoration.html' %}
+{% load static %}
+
+{% block title %} Project details {% endblock %}
+
+
+{% block content %}
+         <!-- This div represent page navbar -->
+        <div class="navbar">
+            <a class="navbar-logo" href="{% url 'home_set' %}">
+                <img src="{% static 'images/AGIX PaDer.png'%}">
+            </a>
+            <ul class="buttons">
+                <li class="btm"><a class="nav-link" href="{% url 'staff' %}">Staff</a></li>
+                {% if request.user.is_authenticated %}
+                <li class="btm"><a class="nav-link" href="{% url 'login' %}">Logout Admin</a></li>
+                {% endif %}  
+            </ul>
+        </div>
+        <div class="id-container">
+            <div class="project-pic">
+                <img src="{{project.project_image.url}}" altr="Sorry picture not found" class="prof-pic">
+                
+            </div>
+            <div class="personal">
+                <h2 class="prj-name">Project:<span>  {{project.project_name}}</span></h2>
+                <h3 class="clt-name">Owner:<span>    {{project.client_name}}</span></h3>
+                <h2 class="bio">Description:</h2>
+                <p>{{project.project_description}}</p>
+            </div>
+        </div>
+
+{% endblock %}
